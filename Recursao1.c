@@ -29,7 +29,7 @@ void ImprimeInvertido(char *string)
     {
         return;
     }
-// jujuba
+//juliana
     if (string[i] == ' ')
     {
         j = i - 1;
