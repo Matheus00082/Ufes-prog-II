@@ -1,0 +1,21 @@
+/////biblioteca estatica/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- gcc -c arquivo.c...(quantos .c tiver): compilar os .c's referentes a biblioteca em .o's
+
+- ar rcs lib'nome'.a arquivo.o...(quantos .o tiver): utilizar o utilitário ar para criar a biblioteca .a usando os arquivos .o
+	
+- gcc principal.c -o executavel -L. -l'nome': a biblioteca é linkada ao programa durante a compilação
+
+/////biblioteca dinamica/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- gcc -c -fPIC arquivo.c...(quantos .c tiver): compilar os .c's referentes a biblioteca em .o's
+
+- gcc -shared -o lib'nome'.so arquivo.o...(quantos .o tiver): criar a biblioteca .so usando os arquivos .o
+
+- gcc principal.c -o executavel -L. -l'nome': a biblioteca é linkada ao programa durante a compilação
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+*Importante: O parâmetro -L. especifica para o compilador que ele deve procurar a biblioteca no diretório atual. Você pode passar um caminho para ele ou configurar a variável de ambiente LD_LIBRARY_PATH para o caminho que o compilador deve observar
+
+*Importante: toda biblioteca precisa começar com o prefixo lib
