@@ -8,10 +8,10 @@
 tPaciente inicia_paciente()
 {
     tPaciente paciente;
-    scanf("%[^\n]\n", paciente.nome);
-    paciente.dataNasc = le_data(paciente.dataNasc);
-    scanf("%[^\n]\n", paciente.cartaoSus);
-    scanf("%c", &paciente.gen);
+    scanf(" %[^\n]%*c", paciente.nome);
+    paciente.dataNasc = le_data();
+    scanf(" %[^\n]%*c", paciente.cartaoSus);
+    scanf(" %c%*c", &paciente.gen);
     paciente.qtdLesoes = 0;
     return paciente;
 }
@@ -28,20 +28,24 @@ tPaciente associa_lesao(tLesao lesao, tPaciente paciente)
 
 void ImprimirPacientes(tPaciente *pacientes, int numPacientes)
 {
-    int i = 0, j;
+    int i = 0, j = 0;
 
     while (i < numPacientes)
     {
         j = 0;
 
-        printf("- %s -", pacientes[i].nome);
-
-        while (j < pacientes[i].qtdLesoes)
+        if (pacientes[i].qtdLesoes > 0)
         {
-            printf(" %s", pacientes[i].lesao[j].id);
-            j++;
-        }
+            printf("- %s -", pacientes[i].nome);
 
+            while (j < pacientes[i].qtdLesoes)
+            {
+                printf(" %s", pacientes[i].lesao[j].id);
+                j++;
+            }
+
+            printf("\n");
+        }
         i++;
     }
 }

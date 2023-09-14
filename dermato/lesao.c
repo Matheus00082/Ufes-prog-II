@@ -8,10 +8,10 @@
 tLesao inicia_lesao()
 {
     tLesao lesao;
-    scanf("%[^\n]\n", lesao.cartaoSus);
-    scanf("%[^\n]\n", lesao.id);
-    scanf("%[^\n]\n", lesao.diagnostico);
-    scanf("%[^\n]\n", lesao.regiao);
-    scanf("%d", &lesao.porcentagem);
+    scanf(" %[^\n]\n", lesao.cartaoSus);
+    scanf(" %[^\n]\n", lesao.id);
+    scanf(" %[^\n]\n", lesao.diagnostico);
+    scanf(" %[^\n]\n", lesao.regiao);
+    scanf(" %d", &lesao.porcentagem);
     return lesao;
 }

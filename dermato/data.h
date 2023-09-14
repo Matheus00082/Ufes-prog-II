@@ -8,7 +8,7 @@ typedef struct
     int ano;
 } tData;
 
-tData le_data(tData data);
+tData le_data();
 int verificaDataValida(int dia, int mes, int ano);
 int verificaBissexto(int ano);
 int numeroDiasMes(int mes, int ano);

@@ -5,9 +5,10 @@
 #include "constantes.h"
 #include <string.h>
 
-tData le_data(tData data)
+tData le_data()
 {
-    scanf("%d/%d/%d", &data.dia, &data.mes, &data.ano);
+    tData data;
+    scanf("%d/%d/%d\n", &data.dia, &data.mes, &data.ano);
     return data;
 }
 

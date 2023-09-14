@@ -14,7 +14,8 @@ int main()
 
     while (TRUE)
     {
-        scanf("%c", &id);
+        scanf(" %c", &id);
+
         if (id == 'P')
         {
             regPacientes[qtdPacientes] = inicia_paciente();
@@ -31,7 +32,7 @@ int main()
 
             while (i < qtdPacientes)
             {
-                associa_lesao(lesao, regPacientes[i]);
+                regPacientes[i] = associa_lesao(lesao, regPacientes[i]);
                 i++;
             }
 
@@ -43,12 +44,12 @@ int main()
         }
         else
         {
-            printf("identificacao invalida");
+            printf("identificacao invalida\n");
             exit(1);
         }
     }
 
-    i = FALSE;
+    i = 0;
 
     while (i < qtdPacientes)
     {
