@@ -5,43 +5,62 @@
 #include "constantes.h"
 #include <string.h>
 
-tPaciente inicia_paciente()
+tData le_data(tData data)
 {
-    tPaciente paciente;
-    scanf("%[^\n]\n", paciente.nome);
-    paciente.dataNasc = le_data(paciente.dataNasc);
-    scanf("%[^\n]\n", paciente.cartaoSus);
-    scanf("%c", &paciente.gen);
-    paciente.qtdLesoes = 0;
-    return paciente;
+    scanf("%d/%d/%d", &data.dia, &data.mes, &data.ano);
+    return data;
 }
 
-tPaciente associa_lesao(tLesao lesao, tPaciente paciente)
+int verificaDataValida(int dia, int mes, int ano)
 {
-    if ((!strcmp(lesao.cartaoSus, paciente.cartaoSus)) && paciente.qtdLesoes < QTD_MAX_LESOES)
+    if (ano < 1 || mes < 1 || mes > 12 || dia < 1)
     {
-        paciente.lesao[paciente.qtdLesoes] = lesao;
-        paciente.qtdLesoes++;
+        return 0;
     }
-    return paciente;
+
+    int diasNoMes = numeroDiasMes(mes, ano);
+
+    return (dia <= diasNoMes);
 }
 
-void ImprimirPacientes(tPaciente *pacientes, int numPacientes)
+int verificaBissexto(int ano)
 {
-    int i = 0, j;
-
-    while (i < numPacientes)
+    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))
     {
-        j = 0;
-
-        printf("- %s -", pacientes[i].nome);
-
-        while (j < pacientes[i].qtdLesoes)
-        {
-            printf(" %s", pacientes[i].lesao[j].id);
-            j++;
-        }
-
-        i++;
+        return 1;
     }
+    else
+    {
+        return 0;
+    }
+}
+
+int numeroDiasMes(int mes, int ano)
+{
+    if (mes < 1 || mes > 12)
+    {
+        return -1;
+    }
+
+    int diasPorMes[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if (mes == 2 && verificaBissexto(ano))
+    {
+        return 29;
+    }
+    else
+    {
+        return diasPorMes[mes];
+    }
+}
+
+int calcularIdade(tData dataNasc)
+{
+    int idade = ANO_ATUAL - dataNasc.ano;
+
+    if (MES_ATUAL < dataNasc.mes || (MES_ATUAL == dataNasc.mes && DIA_ATUAL < dataNasc.dia))
+    {
+        idade--;
+    }
+    return idade;
 }
