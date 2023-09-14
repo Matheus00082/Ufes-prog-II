@@ -1,0 +1,6 @@
+# Ignorar arquivos de compilação
+*.o
+
+# Ignorar diretórios de dependências
+testes
+saidas
