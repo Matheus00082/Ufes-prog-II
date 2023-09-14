@@ -1,13 +1,19 @@
-all: geraos principal compilation clean
+CC = gcc
+CFLAGS = -Wall -Wextra -fPIC
+LDFLAGS = -shared
 
-principal: data.o lesao.o paciente.o
-	gcc -shared -o libdermato.so data.o lesao.o paciente.o
+all: principal
+
+principal: libdermato.so
+
+libdermato.so: data.o lesao.o paciente.o
+	$(CC) $(LDFLAGS) -o $@ $^
 	
 geraos: data.c lesao.c paciente.c
-	gcc -c -fPIC data.c lesao.c paciente.c
+	$(CC) $(CFLAGS) -c $^
 
-compilation:
-	gcc main.c -o executavel -L. -ldermato
+compilation: main.c libdermato.so
+	$(CC) $< -o executavel -L. -ldermato
 
 clean:
-	rm -rf *.o
+	rm -rf *.o libdermato.so executavel
