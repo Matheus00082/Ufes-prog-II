@@ -14,6 +14,7 @@ int main()
 
     while (TRUE)
     {
+        scanf("%c", &id);
         if (id == 'P')
         {
             regPacientes[qtdPacientes] = inicia_paciente();
