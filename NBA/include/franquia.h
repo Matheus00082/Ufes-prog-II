@@ -6,7 +6,7 @@
 typedef struct tFranquia
 {
     char nome[TAM_MAX_NOM];
-    char conferencia[TAM_MAX_CONF];
+    char conferencia[TAM_MAX_COSTA];
     int numVitoriasCasa;
     int numVitoriasFora;
     int numDerrotas;
@@ -14,7 +14,11 @@ typedef struct tFranquia
 
 tFranquia inicia_Franquia(tFranquia franquia);
 tFranquia cadastra_Franquia(tFranquia franquia);
+int soma_Vitorias(tFranquia franquia);
+int soma_Derrotas(tFranquia franquia);
+float porcentagem(int derrotas, int vitorias);
+int compara_Nome(char *nome, tFranquia franquia);
 int leste_Oeste(tFranquia franquia);
-void imprimir_Franquia(tFranquia franquia);
+void imprimirFranquia(tFranquia franquia);
 
 #endif

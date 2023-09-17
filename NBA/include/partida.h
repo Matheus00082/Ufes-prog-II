@@ -2,6 +2,7 @@
 #define PARTIDA_H
 
 #include "constantes.h"
+#include "franquia.h"
 
 typedef struct tPartida
 {
@@ -12,6 +13,9 @@ typedef struct tPartida
 } tPartida;
 
 tPartida inicia_Partida(tPartida partida);
+int vencedor(tPartida partida, tFranquia franquia, int flag);
+int perdedor(tPartida partida, tFranquia franquia, int flag);
+int quem_Ganhou(tPartida partida);
 void imprimirPartida(tPartida partida);
 
 #endif

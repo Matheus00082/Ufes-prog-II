@@ -5,7 +5,7 @@
 #include "franquia.h"
 #include <stdlib.h>
 
-tFranquia Cadastra_Franquia(tFranquia franquia)
+tFranquia cadastra_Franquia(tFranquia franquia)
 {
     char linha[100];
 
@@ -34,7 +34,7 @@ tFranquia Cadastra_Franquia(tFranquia franquia)
     return franquia;
 }
 
-int leste_oeste(tFranquia franquia)
+int leste_Oeste(tFranquia franquia)
 {
     if (strcmp(franquia.conferencia, LESTE) == 0)
     {
@@ -48,8 +48,31 @@ int leste_oeste(tFranquia franquia)
     exit(1);
 }
 
+int compara_Nome(char *nome, tFranquia franquia)
+{
+    int rtn;
+    rtn = strcmp(nome, franquia.nome);
+    return rtn;
+}
+
+float porcentagem(int derrotas, int vitorias) { return (100.0 * vitorias) / (vitorias + derrotas); }
+
+int soma_Vitorias(tFranquia franquia)
+{
+    int soma = 0;
+    soma = franquia.numVitoriasCasa + franquia.numVitoriasFora;
+    return soma;
+}
+
+int soma_Derrotas(tFranquia franquia)
+{
+    return franquia.numDerrotas;
+}
+
 void imprimirFranquia(tFranquia franquia)
 {
-    printf("Nome da Franquia: %s\n", franquia.nome);
-    printf("Conferência: %s\n", franquia.conferencia);
+    float porcento = porcentagem(franquia.numDerrotas, (franquia.numVitoriasCasa + franquia.numVitoriasFora));
+    printf("%s \n", franquia.nome);
+    printf("%s", franquia.conferencia);
+    printf(" %d %d %.2f %d %d\n", franquia.numVitoriasCasa + franquia.numVitoriasFora, franquia.numDerrotas, porcento, franquia.numVitoriasCasa, franquia.numVitoriasFora);
 }

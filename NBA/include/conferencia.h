@@ -1,8 +1,8 @@
 #ifndef CONFERENCIA_H
 #define CONFERENCIA_H
 
-#include "constantes.h"
 #include "franquia.h"
+#include "partida.h"
 
 typedef struct tConferencia
 {
@@ -16,5 +16,7 @@ typedef struct tConferencia
 tConferencia inicia_Conferencia_Oeste(tConferencia conferencia);
 tConferencia inicia_Conferencia_Leste(tConferencia conferencia);
 tConferencia add_Franquia_Conferencia(tFranquia franquia,tConferencia conferencias);
+tConferencia conta_Vitorias(tPartida partida,tConferencia conferencia);
+void imprimirConferencia(tConferencia conf);
 
 #endif
