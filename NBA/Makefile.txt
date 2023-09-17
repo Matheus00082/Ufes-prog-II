@@ -1,0 +1,112 @@
+Dinâmica -
+CC = gcc
+
+CC é uma variável que representa o compilador que será usado, neste caso, o GCC (GNU Compiler Collection). É uma convenção comum usar CC para se referir ao compilador.
+
+CFLAGS = -Wall -Werror -std=c99 -Iinclude -fPIC
+
+CFLAGS é uma variável que contém as opções de compilação usadas pelo compilador. Cada opção tem um significado específico:
+
+        -Wall: Ativa todas as opções de aviso, o que ajuda a identificar possíveis problemas no código.
+        -Werror: Trata os avisos como erros, fazendo com que o compilador pare a compilação se encontrar algum aviso.
+        -std=c99: Especifica que o código fonte segue o padrão C99, uma versão específica da linguagem C.
+        -Iinclude: Especifica ao compilador que ele deve procurar arquivos de cabeçalho no diretório include.
+        -fPIC: Gera código independente de posição, o que é necessário ao criar bibliotecas compartilhadas (dynamic libraries).
+
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+LIBDIR = lib
+
+Essas variáveis definem os diretórios onde diferentes tipos de arquivos serão armazenados:
+
+SRCDIR: Diretório onde os arquivos de código-fonte (.c) estão localizados.
+OBJDIR: Diretório onde os arquivos de objeto (.o) gerados durante a compilação serão armazenados.
+BINDIR: Diretório onde o executável final será gerado.
+LIBDIR: Diretório onde a biblioteca dinâmica (.so) será gerada.
+
+LIBRARY = libnba.so
+LIBRARY é uma variável que define o nome da biblioteca dinâmica que será gerada, neste caso, libnba.so.
+
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+
+SOURCES é uma variável que contém a lista de todos os arquivos de código-fonte (.c) no diretório SRCDIR. O comando $(wildcard ...) é usado para listar os arquivos automaticamente.
+
+OBJECTS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
+
+OBJECTS é uma variável que contém a lista de todos os arquivos de objeto (.o) que serão gerados a partir dos arquivos de código-fonte. O comando $(patsubst ...) é usado para substituir os arquivos de código-fonte pelo mesmo nome, mas com a extensão .o e o diretório de saída alterado para OBJDIR.
+
+EXECUTABLE = executavel
+EXECUTABLE é uma variável que define o nome do executável final que será gerado, neste caso, executavel.
+
+all: $(BINDIR)/$(EXECUTABLE) $(LIBDIR)/$(LIBRARY)
+all é uma regra que define o que será construído quando você executar make all. Ela depende da criação do executável e da biblioteca dinâmica.
+
+$(BINDIR)/$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXECUTABLE) $^
+
+Essa regra define como criar o executável final. Ela depende dos arquivos de objeto listados em OBJECTS. O comando $(CC) $(CFLAGS) -o ... instrui o compilador ($(CC)) a usar as opções de compilação ($(CFLAGS)) para compilar os arquivos de objeto em um executável no diretório BINDIR.
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+Essa regra define como criar os arquivos de objeto a partir dos arquivos de código-fonte. Ela especifica que cada arquivo de objeto (%.o) depende de um arquivo de código-fonte correspondente (%.c). O comando $(CC) $(CFLAGS) -c -o ... instrui o compilador a usar as opções de compilação para compilar o código-fonte em um arquivo de objeto no diretório OBJDIR.
+
+$(LIBDIR)/$(LIBRARY): $(OBJECTS)
+	$(CC) $(CFLAGS) -shared -o $(LIBDIR)/$(LIBRARY) $^
+
+Essa regra define como criar a biblioteca dinâmica. Ela depende dos arquivos de objeto listados em OBJECTS. O comando $(CC) $(CFLAGS) -shared -o ... instrui o compilador a usar as opções de compilação para criar uma biblioteca dinâmica (-shared) com o nome especificado no diretório LIBDIR.
+
+clean:
+	rm -f $(OBJDIR)/*.o $(BINDIR)/$(EXECUTABLE) $(LIBDIR)/$(LIBRARY)
+
+A regra clean define como limpar os arquivos gerados. Ela remove todos os ar
+
+Estática - 
+
+# Compilador e opções de compilação
+CC = gcc
+CFLAGS = -Wall -Werror -std=c99 -Iinclude
+
+# Diretórios
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+LIBDIR = lib
+
+# Nome da biblioteca estática
+LIBRARY = libnba.a
+
+# Lista de arquivos de origem
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+
+# Lista de arquivos-objeto
+OBJECTS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
+
+# Nome do executável principal
+EXECUTABLE = executavel
+
+# Alvo principal (compilação do programa principal e da biblioteca estática)
+all: $(BINDIR)/$(EXECUTABLE) $(LIBDIR)/$(LIBRARY)
+
+# Regra para compilar o programa principal
+$(BINDIR)/$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(BINDIR)/$(EXECUTABLE) $^
+
+# Regra para compilar arquivos-objeto
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+# Regra para criar a biblioteca estática
+$(LIBDIR)/$(LIBRARY): $(OBJECTS)
+	ar rcs $(LIBDIR)/$(LIBRARY) $^
+
+# Alvo para limpar arquivos gerados
+clean:
+	rm -f $(OBJDIR)/*.o $(BINDIR)/$(EXECUTABLE) $(LIBDIR)/$(LIBRARY)
+
+# Alvo opcional para construir tudo de uma vez
+build: all
+
+# Alvo phony para prevenir conflitos com arquivos de mesmo nome
+.PHONY: all clean build

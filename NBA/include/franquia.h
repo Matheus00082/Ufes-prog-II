@@ -10,10 +10,11 @@ typedef struct tFranquia
     int numVitoriasCasa;
     int numVitoriasFora;
     int numDerrotas;
-    int aproveitamento;
 } tFranquia;
 
-tFranquia Cadastra_Franquia(tFranquia franquia);
-void imprimirFranquia(tFranquia franquia);
+tFranquia inicia_Franquia(tFranquia franquia);
+tFranquia cadastra_Franquia(tFranquia franquia);
+int leste_Oeste(tFranquia franquia);
+void imprimir_Franquia(tFranquia franquia);
 
 #endif

@@ -6,7 +6,8 @@
 int diferencia_Partida_Franquia()
 {
     char aux;
-    scanf(" %c\n", &aux);
+    scanf("%c ", &aux);
+
     if (aux == 'F')
     {
         return 1;
@@ -21,7 +22,7 @@ int diferencia_Partida_Franquia()
     }
     else
     {
-        printf("Identificador nao cadastrado (F/P)");
-        exit(1);
+        printf("Identificador nao cadastrado (%c)", aux);
+        return -1;
     }
 }
