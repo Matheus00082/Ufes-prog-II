@@ -8,10 +8,12 @@
 
 int main()
 {
-    tFranquia franquia, temporada[31];
+    tFranquia franquia;
+    tFranquia temporada[31];
     tPartida partida;
     tConferencia conferencias[QTD_MAX_CONFERENCIAS];
-    int escolha, idConf = 0, i = 0, j = 0;
+    int escolha, idConf = 0;
+    int j = 0, i = 0;
 
     conferencias[RTN_LESTE] = inicia_Conferencia_Leste(conferencias[RTN_LESTE]);
     conferencias[RTN_OESTE] = inicia_Conferencia_Oeste(conferencias[RTN_OESTE]);
@@ -38,15 +40,20 @@ int main()
             break;
         }
     }
-
-    /*while (j <= i)
+    while (j <= i)
     {
-        x(temporada[j], conferencias[RTN_LESTE]);
-        x(temporada[j], conferencias[RTN_OESTE]);
+        temporada[j] = associarTimes(temporada[j], conferencias[RTN_LESTE]);
+        temporada[j] = associarTimes(temporada[j], conferencias[RTN_OESTE]);
+        j++;
+    }
 
+    j = 0;
+
+    while (j < i)
+    {
         imprimirFranquia(temporada[j]);
         j++;
-    }*/
+    }
 
     imprimirConferencia(conferencias[RTN_LESTE]);
     imprimirConferencia(conferencias[RTN_OESTE]);

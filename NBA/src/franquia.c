@@ -55,6 +55,13 @@ int compara_Nome(char *nome, tFranquia franquia)
     return rtn;
 }
 
+int compara_Nome_franq(tFranquia franq, tFranquia franquia)
+{
+    int rtn;
+    rtn = strcmp(franq.nome, franquia.nome);
+    return rtn;
+}
+
 float porcentagem(int derrotas, int vitorias) { return (100.0 * vitorias) / (vitorias + derrotas); }
 
 int soma_Vitorias(tFranquia franquia)
@@ -69,10 +76,28 @@ int soma_Derrotas(tFranquia franquia)
     return franquia.numDerrotas;
 }
 
+tFranquia conta_Pontos_VC(tFranquia franquia)
+{
+    franquia.numVitoriasCasa++;
+    return franquia;
+}
+
+tFranquia conta_Pontos_VV(tFranquia franquia)
+{
+    franquia.numVitoriasFora++;
+    return franquia;
+}
+
+tFranquia conta_Pontos_D(tFranquia franquia)
+{
+    franquia.numDerrotas++;
+    return franquia;
+}
+
 void imprimirFranquia(tFranquia franquia)
 {
     float porcento = porcentagem(franquia.numDerrotas, (franquia.numVitoriasCasa + franquia.numVitoriasFora));
-    printf("%s \n", franquia.nome);
-    printf("%s", franquia.conferencia);
-    printf(" %d %d %.2f %d %d\n", franquia.numVitoriasCasa + franquia.numVitoriasFora, franquia.numDerrotas, porcento, franquia.numVitoriasCasa, franquia.numVitoriasFora);
+    printf("%s ", franquia.nome);
+    printf("%s ", franquia.conferencia);
+    printf("%d %d %.2f %d %d\n", franquia.numVitoriasCasa + franquia.numVitoriasFora, franquia.numDerrotas, porcento, franquia.numVitoriasCasa, franquia.numVitoriasFora);
 }

@@ -52,23 +52,32 @@ tConferencia conta_Vitorias(tPartida partida, tConferencia conferencia)
 
         if (ganhou == CASA)
         {
-            conferencia.times[i].numVitoriasCasa++;
+            conferencia.times[i] = conta_Pontos_VC(conferencia.times[i]);
         }
         else if (ganhou == VSTA)
         {
-            conferencia.times[i].numVitoriasFora++;
+            conferencia.times[i] = conta_Pontos_VV(conferencia.times[i]);
         }
 
-        if (perdeu == VSTA)
+        if (perdeu == VSTA || perdeu == CASA)
         {
-            conferencia.times[i].numDerrotas++;
-        }
-        else if (perdeu == CASA)
-        {
-            conferencia.times[i].numDerrotas++;
+            conferencia.times[i] = conta_Pontos_D(conferencia.times[i]);
         }
     }
     return conferencia;
+}
+
+tFranquia associarTimes(tFranquia temporadas, tConferencia conferencia)
+{
+    for (int i = 0; i < conferencia.qtdTimes; i++)
+    {
+        if (compara_Nome_franq(conferencia.times[i], temporadas) == 0)
+        {
+            temporadas = conferencia.times[i];
+            break;
+        }
+    }
+    return temporadas;
 }
 
 void imprimirConferencia(tConferencia conf)

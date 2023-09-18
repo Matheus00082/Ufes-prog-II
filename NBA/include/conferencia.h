@@ -15,8 +15,9 @@ typedef struct tConferencia
 
 tConferencia inicia_Conferencia_Oeste(tConferencia conferencia);
 tConferencia inicia_Conferencia_Leste(tConferencia conferencia);
-tConferencia add_Franquia_Conferencia(tFranquia franquia,tConferencia conferencias);
-tConferencia conta_Vitorias(tPartida partida,tConferencia conferencia);
+tConferencia add_Franquia_Conferencia(tFranquia franquia, tConferencia conferencias);
+tFranquia associarTimes(tFranquia temporadas, tConferencia conferencia);
+tConferencia conta_Vitorias(tPartida partida, tConferencia conferencia);
 void imprimirConferencia(tConferencia conf);
 
 #endif
