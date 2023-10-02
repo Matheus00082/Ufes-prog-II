@@ -16,25 +16,33 @@ void rolando(char msg[NUM_MAX_MSGS][TAM_MAX_MSG], int *numMsgs)
     }
 
     int len = strlen(mensagemConcatenada);
+    char painel[31];
 
-    for (int i = 0; i < TAM_MAX_MSG; i++)
+    for (int i = 0; i < len; i++)
     {
-        int temp = mensagemConcatenada[len - 1];
 
-        for (int i = len - 1; i > 0; i--)
+        for (int i = 0; i < 31; i++)
         {
-            mensagemConcatenada[i] = mensagemConcatenada[i - 1];
+            painel[i] = mensagemConcatenada[i];
+
+            if (len < 30 && i == len)
+            {
+                break;
+            }
         }
 
-        mensagemConcatenada[0] = temp;
+        printf("\033[H\033[J%s\n", painel);
+        int temp = mensagemConcatenada[0];
 
-        for (int j = 0; j < len; j++)
+        for (int i = 0; i < len; i++)
         {
-            printf("%c", mensagemConcatenada[j]);
+            mensagemConcatenada[i] = mensagemConcatenada[i + 1];
         }
-        printf("\033[H\033[J");
-        usleep(500000);
+
+        mensagemConcatenada[len - 1] = temp;
+        sleep(1);
     }
+    printf("\033[H\033[J");
 }
 
 int main()

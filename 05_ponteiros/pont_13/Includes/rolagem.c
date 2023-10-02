@@ -12,8 +12,8 @@ void RolaMsg(FptrMsg corre, int tamanhoDisplay, int tempoFim)
     for (int i = 0; i < tamanhoDisplay; i++)
     {
         printf("Digite a mensagem %d: ", i + 1);
-        fgets(msg[i], TAM_MAX_MSG, stdin);
-        msg[i][strcspn(msg[i], "\n")] = '\0';
+        scanf("%[^\n]", msg[i]);
+        getchar();
     }
 
     corre(msg, &tamanhoDisplay);
